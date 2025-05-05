@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>代購金額換算</title>
+    <title>StarShine🫧代購金額換算</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -41,8 +41,8 @@
     </div>
 
     <script>
-        const rate = 4.4;         // 基本匯率
-        const feeFixed = 15;      // 固定代購費（可選用）
+        const rate = 4.4;
+        const feeFixed = 15;
 
         function convert() {
             const rmb = parseFloat(document.getElementById('rmb').value);
@@ -56,7 +56,6 @@
 
             const baseTWD = rmb * rate;
 
-            // 可二選一：百分比代購費 or 固定代購費
             const totalTWD = baseTWD + feeFixed;
 
             resultBox.textContent = `需支付台幣：${totalTWD.toFixed(2)} 元`;
