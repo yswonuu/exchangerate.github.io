@@ -5,37 +5,75 @@
     <title>StarShine🫧代購金額換算</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
             padding: 50px;
+            margin: 0;
         }
-        .box {
-            background: #fff;
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
             padding: 30px;
-            border-radius: 10px;
-            max-width: 400px;
-            margin: auto;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-        input, button {
-            padding: 10px;
+        h2 {
+            font-size: 1.8em;
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        label {
             font-size: 1.1em;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
+        select, input, button {
             width: 100%;
+            padding: 12px;
             margin-top: 10px;
+            font-size: 1.1em;
+            border-radius: 10px;
+            border: 1px solid #ddd;
             box-sizing: border-box;
+            background-color: #f9f9f9;
+        }
+        select, input {
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #569ae3;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #157be9;
         }
         #result {
-            margin-top: 20px;
-            font-size: 1.3em;
+            margin-top: 30px;
+            font-size: 1.5em;
+            font-weight: bold;
             color: #c46ffd;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="box">
         <h2>StarShine🫧代購金額換算</h2>
-        <label for="rmb">請輸入需代購商品之人民幣金額：</label>
-        <input type="number" id="rmb" placeholder="例如 100">
+        <label for="currency">選擇幣別：</label>
+        <select id="currency">
+            <option value="CNY">人民幣 (CNY)</option>
+            <option value="KRW">韓幣 (KRW)</option>
+            <option value="JPY">日幣 (JPY)</option>
+        </select>
+        <br>
+        <label for="amount">請輸入金額：</label>
+        <input type="number" id="amount" placeholder="例如 1000">
+
         <button onclick="convert()">換算</button>
         <div id="result"></div>
     </div>
@@ -43,20 +81,37 @@
     <script>
         const rate = 4.4;
         const feeFixed = 15;
+        const settings = {
+            CNY: {
+                rate: 4.4,         // 1 CNY = ? TWD
+                feeFixed: 15
+            },
+            KRW: {
+                rate: 0.023,       // 1 KRW = ? TWD
+                feeFixed: 20
+            },
+            JPY: {
+                rate: 0.22,        // 1 JPY = ? TWD
+                feeFixed: 15
+            }
+        };
 
         function convert() {
-            const rmb = parseFloat(document.getElementById('rmb').value);
+            const currency = document.getElementById('currency').value;
+            const amount = parseFloat(document.getElementById('amount').value);
             const resultBox = document.getElementById('result');
 
-            if (isNaN(rmb) || rmb <= 0) {
+            if (isNaN(amount) || amount <= 0) {
                 resultBox.textContent = '請輸入有效的金額';
                 resultBox.style.color = 'red';
                 return;
             }
 
-            const baseTWD = rmb * rate;
+            const rate = settings[currency].rate;
+            const fee = settings[currency].feeFixed;
 
-            const totalTWD = baseTWD + feeFixed;
+            const baseTWD = amount * rate;
+            const totalTWD = baseTWD + fee;
 
             resultBox.textContent = `需支付台幣：${totalTWD.toFixed(2)} 元`;
             resultBox.style.color = '#c46ffd';
