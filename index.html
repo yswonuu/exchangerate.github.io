@@ -84,21 +84,25 @@
             }
         }
         footer {
-            color: #c46ffd; /* 字顏色：淡紫色 */
             font-family: 'Comic Sans MS', cursive;
             position: fixed;
             bottom: 0;
             width: 100%;
-            text-align: center; 
-            z-index: 1000; 
-            font-size: 16px;
-            background-color: transparent; 
-            padding: 10px 0; 
-            text-shadow: 1px 1px 2px rgba(79, 78, 78, 0.5); 
+            text-align: center;
+            z-index: 1000;
+            font-size: 18px;
+            background-color: transparent;
+            padding: 10px 0;
+
+            /* 漸層文字 + 陰影立體感 */
+            background: linear-gradient(to right, #c46ffd, #6c63ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         footer a {
-            color: #c46ffd !important; /* 連結也設成相同顏色，並加 !important 防止被瀏覽器預設藍色覆蓋 */
+            color: inherit; /* 使用與文字一樣的漸層效果 */
             text-decoration: none;
         }
 
