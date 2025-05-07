@@ -141,12 +141,12 @@
                 feeFixed: 15
             },
             KRW: {
-                rate: 0.022,       // 1 KRW = ? TWD
+                rate: 0.0218,       // 1 KRW = ? TWD
                 feeFixed: 15
             },
             JPY: {
-                rate: 0.21,        // 1 JPY = ? TWD
-                feeFixed: 15
+                rate: 0.22,        // 1 JPY = ? TWD
+                ffeePercent: 3
             }
         };
 
@@ -162,10 +162,18 @@
             }
 
             const rate = settings[currency].rate;
-            const fee = settings[currency].feeFixed;
+            const currencySetting = settings[currency];
 
             const baseTWD = amount * rate;
-            const totalTWD = baseTWD + fee;
+
+            let fee = 0;
+            if ('feePercent' in currencySetting) {
+                fee = baseTWD * (currencySetting.feePercent / 100);
+            } else if ('feeFixed' in currencySetting) {
+                fee = currencySetting.feeFixed;
+            }
+
+            const totalTWD = baseTWD + fee; // 計算總台幣金額
 
             resultBox.textContent = `需支付台幣：${totalTWD.toFixed(2)} 元`;
             resultBox.style.color = '#c46ffd';
