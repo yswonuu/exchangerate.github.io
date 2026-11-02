@@ -94,7 +94,6 @@
             background-color: transparent;
             padding: 10px 0;
 
-            /* 漸層文字 + 陰影立體感 */
             background: linear-gradient(to right, #c46ffd, #6c63ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -102,7 +101,7 @@
         }
 
         footer a {
-            color: inherit; /* 使用與文字一樣的漸層效果 */
+            color: inherit; 
             text-decoration: none;
         }
 
@@ -137,16 +136,16 @@
     <script>
         const settings = {
             CNY: {
-                rate: 5,         // 1 CNY = ? TWD
+                rate: 5.1,         // 1 CNY = ? TWD
                 feeFixed: 0
             },
             KRW: {
-                rate: 0.0222,       // 1 KRW = ? TWD
-                feeFixed: 5
+                rate: 0.0257,       // 1 KRW = ? TWD
+                feeFixed: 0
             },
             JPY: {
-                rate: 0.212,        // 1 JPY = ? TWD
-                feeFixed: 4
+                rate: 0.213,        // 1 JPY = ? TWD
+                feeFixed: 3
             }
         };
 
